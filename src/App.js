@@ -7,8 +7,8 @@ import LoadingBar from "react-top-loading-bar"
 
 const App = () => {
 	//REACT_APP_NEWS_API_SK = "3b158fa948604ad3a11f2d5099eddbca"
+	//AT - 7c0eb8862a63466088ff9fa0ff2d0467
 	//REACT_APP_NEWS_API_RJ = "2791e13e936f441ab96d3b40560cd868"
-	//7c0eb8862a63466088ff9fa0ff2d0467 //Atul
 	//apiKey = process.env.REACT_APP_NEWS_API_RJ
 	const apiKey = "7c0eb8862a63466088ff9fa0ff2d0467"
 

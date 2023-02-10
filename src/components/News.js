@@ -11,26 +11,36 @@ const News = (props) => {
 	const [totalResult, setTotalResult] = useState(0)
 	const [resultFound, setResultFound] = useState(true)
 
-	document.title = this.capitalize(props.category) + " - NewsBuddy"
+	const capitalize = (input) => {
+		return input.charAt(0).toUpperCase() + input.slice(1)
+	}
+
+	document.title = capitalize(props.category) + " - NewsBuddy"
+
 	useEffect(() => {
 		LoadNews()
-	})
+	}, [])
 
 	const fetchMoreData = async () => {
-		setPage(page + 1)
-		let url = `https://newsapi.org/v2/top-headlines?country=in&category=${props.category}&apiKey=${props.apiKey}&pagesize=${props.pageSize}&page=${page}`
+		console.log("articles.length : " + articles.length)
+		console.log("totalResult : " + totalResult)
 
-		let data = await fetch(url)
-		let parsedData = await data.json()
-
-		setArticles(articles.concat(parsedData.articles))
-		setTotalResult(parsedData.totalResults)
+		if (articles.length <= totalResult) {
+			setPage(page + 1)
+			let url = `https://newsapi.org/v2/top-headlines?country=in&category=${
+				props.category
+			}&apiKey=${props.apiKey}&pagesize=${props.pageSize}&page=${page + 1}`
+			let data = await fetch(url)
+			let parsedData = await data.json()
+			setPage(page + 1)
+			setArticles(articles.concat(parsedData.articles))
+			setTotalResult(parsedData.totalResults)
+		}
 	}
 	const LoadNews = async () => {
 		props.setProgress(0)
 		setLoading(true)
 		let url = `https://newsapi.org/v2/top-headlines?country=in&category=${props.category}&apiKey=${props.apiKey}&pagesize=${props.pageSize}&page=${page}`
-
 		let data = await fetch(url)
 		props.setProgress(30)
 		let parsedData = await data.json()
@@ -47,11 +57,6 @@ const News = (props) => {
 		props.setProgress(100)
 	}
 
-	const capitalize = (input) => {
-		return input.charAt(0).toUpperCase() + input.slice(1)
-	}
-
-	let {pageSize} = this.props
 	return (
 		<>
 			{resultFound ? (
@@ -63,7 +68,7 @@ const News = (props) => {
 
 					<InfiniteScroll
 						dataLength={articles.length}
-						next={this.fetchMoreData}
+						next={fetchMoreData}
 						hasMore={articles.length !== totalResult}
 						loader={articles.length >= totalResult ? "" : <Spinner></Spinner>}
 					>
