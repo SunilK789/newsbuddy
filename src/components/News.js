@@ -34,7 +34,6 @@ export default class News extends Component {
 		})
 	}
 	async LoadNews() {
-		//console.log(this.props.apiKey)
 		this.props.setProgress(0)
 		this.setState({loading: true})
 		let url = `https://newsapi.org/v2/top-headlines?country=in&category=${this.props.category}&apiKey=${this.props.apiKey}&pagesize=${this.props.pageSize}&page=${this.state.page}`
@@ -42,16 +41,14 @@ export default class News extends Component {
 		let data = await fetch(url)
 		this.props.setProgress(30)
 		let parsedData = await data.json()
-		if (parsedData.code === "rateLimited") {
+		if (parsedData.status === "error") {
 			this.setState({
 				resultFound: false,
 			})
-			console.log(this.state.resultFound)
 		} else {
 			this.setState({
 				resultFound: true,
 			})
-			console.log(this.state.resultFound)
 		}
 		this.props.setProgress(70)
 		this.setState({
@@ -60,7 +57,6 @@ export default class News extends Component {
 			loading: false,
 		})
 		this.props.setProgress(100)
-		//this.props.setProgress(0)
 	}
 
 	capitalize = (input) => {
