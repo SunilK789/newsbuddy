@@ -1,7 +1,8 @@
-import React, {Component} from "react"
+import React from "react"
 
 const NewsItem = (props) => {
 	let {title, description, imageUrl, newsUrl, source, author, date} = props
+	
 	let defaultImageUrl =
 		"https://images.livemint.com/img/2023/02/09/600x338/Stock_market_news_1675911573752_1675911573909_1675911573909.jpg"
 	return (
