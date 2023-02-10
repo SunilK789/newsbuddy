@@ -1,0 +1,10 @@
+{
+    "diffEditor.wordWrap": "on",
+    "editor.minimap.size": "fill",
+    "prettier.semi": false,
+    "prettier.proseWrap": "never",
+    "prettier.vueIndentScriptAndStyle": true,
+    "prettier.useEditorConfig": false,
+    "prettier.embeddedLanguageFormatting": "auto",
+    "prettier.endOfLine": "auto"
+}
